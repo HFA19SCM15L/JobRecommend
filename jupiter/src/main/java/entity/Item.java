@@ -1,116 +1,129 @@
 package entity;
 
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Item {
-	private String itemId;
-	private String name;
-	private String address;
-	private Set<String> keywords;
-	private String imageUrl;
-	private String url;
-
-	private Item(ItemBuilder builder) {
-		this.itemId = builder.itemId;
-		this.name = builder.name;
-		this.address = builder.address;
-		this.imageUrl = builder.imageUrl;
-		this.url = builder.url;
-		this.keywords = builder.keywords;
-	}
+	private static final AtomicInteger ID_GENERATOR = new AtomicInteger(0); // For generating unique item IDs
+	private int itemId;
+	private String jobTitle;
+	private String employerName;
+	private String employerLogo;
+	private String jobApplyLink;
+	private String jobCity;
+	private String jobState;
 
 	public String getItemId() {
-		return itemId;
+		return String.valueOf(itemId);
 	}
 
-	public void setItemId(String itemId) {
+	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
 
-	public String getName() {
-		return name;
+	public String getJobTitle() {
+		return jobTitle;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getEmployerName() {
+		return employerName;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setEmployerName(String employerName) {
+		this.employerName = employerName;
 	}
 
-	public Set<String> getKeywords() {
-		return keywords;
+	public String getEmployerLogo() {
+		return employerLogo;
 	}
 
-	public void setKeywords(Set<String> keywords) {
-		this.keywords = keywords;
+	public void setEmployerLogo(String employerLogo) {
+		this.employerLogo = employerLogo;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public String getJobApplyLink() {
+		return jobApplyLink;
 	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setJobApplyLink(String jobApplyLink) {
+		this.jobApplyLink = jobApplyLink;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getJobCity() {
+		return jobCity;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setJobCity(String jobCity) {
+		this.jobCity = jobCity;
+	}
+
+	public String getJobState() {
+		return jobState;
+	}
+
+	public void setJobState(String jobState) {
+		this.jobState = jobState;
+	}
+
+	private Item(ItemBuilder builder) {
+		this.itemId = ID_GENERATOR.getAndIncrement();;
+		this.jobTitle = builder.jobTitle;
+		this.employerName = builder.employerName;
+		this.employerLogo = builder.employerLogo;
+		this.jobApplyLink = builder.jobApplyLink;
+		this.jobCity = builder.jobCity;
+		this.jobState = builder.jobState;
 	}
 
 	public JSONObject toJSONObject() {
 		JSONObject obj = new JSONObject();
 		obj.put("item_id", itemId);
-		obj.put("name", name);
-		obj.put("address", address);
-		obj.put("keywords", new JSONArray(keywords));
-		obj.put("image_url", imageUrl);
-		obj.put("url", url);
+		obj.put("job_title", jobTitle);
+		obj.put("employer_name", employerName);
+		obj.put("employer_logo", employerLogo);
+		obj.put("job_apply_link", jobApplyLink);
+		obj.put("job_city", jobCity);
+		obj.put("job_state", jobState);
 		return obj;
 	}
 
 	public static class ItemBuilder {
-		private String itemId;
-		private String name;
-		private String address;
-		private String imageUrl;
-		private String url;
-		private Set<String> keywords;
+		private String jobTitle;
+		private String employerName;
+		private String employerLogo;
+		private String jobApplyLink;
+		private String jobCity;
+		private String jobState;
 
-		public void setItemId(String itemId) {
-			this.itemId = itemId;
+		public void setJobTitle(String jobTitle) {
+			this.jobTitle = jobTitle;
 		}
 
-		public void setName(String name) {
-			this.name = name;
+		public void setEmployerName(String employerName) {
+			this.employerName = employerName;
 		}
 
-		public void setAddress(String address) {
-			this.address = address;
+		public void setEmployerLogo(String employerLogo) {
+			this.employerLogo = employerLogo;
 		}
 
-		public void setImageUrl(String imageUrl) {
-			this.imageUrl = imageUrl;
+		public void setJobApplyLink(String jobApplyLink) {
+			this.jobApplyLink = jobApplyLink;
 		}
 
-		public void setUrl(String url) {
-			this.url = url;
+		public void setJobCity(String jobCity) {
+			this.jobCity = jobCity;
 		}
 
-		public void setKeywords(Set<String> keywords) {
-			this.keywords = keywords;
+		public void setJobState(String jobState) {
+			this.jobState = jobState;
 		}
 
 		public Item build() {
