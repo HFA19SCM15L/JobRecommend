@@ -40,13 +40,13 @@ To use the application:
 ## Screenshots
 
 ### Home Page
-![Home Page](./Home Page.png)
+![Home Page](https://github.com/HFA19SCM15L/JobRecommend/blob/add_careerjet_api/Register%20Page.png)
 
 ### Register Page
-![Register Page](./Register Page.png)
+![Register Page](https://github.com/HFA19SCM15L/JobRecommend/blob/add_careerjet_api/Register%20Page.png)
 
 ### Job Search Results
-![Job Search Results](./Search Results.png)
+![Job Search Results](https://github.com/HFA19SCM15L/JobRecommend/blob/add_careerjet_api/Search%20Results.png)
 
 
 ## Contributing
