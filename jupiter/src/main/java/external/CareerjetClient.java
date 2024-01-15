@@ -11,7 +11,7 @@ import java.util.*;
 public class CareerjetClient {
     private static final String DEFAULT_KEYWORD = "software engineer";
     private static final String DEFAULT_LOCATION = "USA";
-    private static final String AFFILIATE_ID = "242674bc1ba5f670b867703f1943e73d";
+    private static final String AFFILIATE_ID = "...";
 
     public List<Item> searchCareerjetJobs(String keyword, String location, int page, String userIp, String userAgent, String requestUrl) {
         if (keyword == null) {

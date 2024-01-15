@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpaCyKeywordExtractor {
-    private static final String PYTHON_SCRIPT_PATH = "/Users/liang/Downloads/simple/JobRecommend/keyword_extraction/keyword_extractor.py";
+    private static final String PYTHON_SCRIPT_PATH = "./keyword_extractor.py";
 
     public static void main(String[] args) {
         String[] textList = {"Elon Musk has shared a photo of the spacesuit designed by SpaceX."};
