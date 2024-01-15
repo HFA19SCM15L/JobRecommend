@@ -37,7 +37,7 @@ To use the application:
 1. Navigate to the `index.html` file to access the home page.
 2. Explore job listings and use the recommendation feature to get personalized job suggestions.
 
-## Screenshots
+## Interface Mockups
 
 ### Home Page
 ![Home Page](https://github.com/HFA19SCM15L/JobRecommend/blob/add_careerjet_api/Register%20Page.png)
