@@ -27,7 +27,7 @@ This project is a job search and recommendation web application designed to prov
 ### Installation
 1. Clone the repository:
    ```
-   git clone [https://github.com/HFA19SCM15L/JobRecommend]
+   git clone https://github.com/HFA19SCM15L/JobRecommend
    ```
 2. Configure AWS RDS MySQL with the necessary environment variables.
 3. Deploy the application to AWS EC2 or run locally using a suitable Java server.
