@@ -1,7 +1,7 @@
 # Job Search & Recommendation Platform
 
 ## Overview
-This project is a job search and recommendation web application designed to provide users with job recommendations based on their profiles and search history. Developed between July 2021 and August 2021, this application showcases the use of modern web technologies and cloud-based functionalities.
+This project is a job search and recommendation web application designed to provide users with job recommendations based on their profiles and search history.
 
 ## Features
 - Job search functionality using AJAX for a smooth user experience.
