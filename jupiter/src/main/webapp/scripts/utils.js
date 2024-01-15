@@ -213,9 +213,14 @@ function showLoadingMessage(msg) {
 }
 
 function showLoginError() {
-	document.querySelector('#login-error').innerHTML = 'Invalid username or password';
-}
+	var errorDiv = document.querySelector('#login-error');
+	errorDiv.innerHTML = 'Invalid username or password';
+	errorDiv.style.display = 'block'; // Show the error div
 
+	setTimeout(function() {
+		errorDiv.style.display = 'none'; // Hide the error div after 5 seconds
+	}, 3000);
+}
 function clearLoginError() {
 	document.querySelector('#login-error').innerHTML = '';
 }

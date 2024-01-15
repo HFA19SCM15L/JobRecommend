@@ -15,47 +15,44 @@ import entity.Item;
 import entity.Item.ItemBuilder;
 
 public class RpcHelper {
-	// Writes a JSONArray to http response.
-	public static void writeJsonArray(HttpServletResponse response, JSONArray array) throws IOException {
-		response.setContentType("application/json");
-		response.getWriter().print(array);
+    // Write JSONArray to http response
+    public static void writeJsonArray(HttpServletResponse response, JSONArray array) throws IOException {
+        response.setContentType("application/json");
+        response.getWriter().print(array);
+    }
 
-	}
+    // Write JSONObject to http response
+    public static void writeJsonObject(HttpServletResponse response, JSONObject obj) throws IOException {
+        response.setContentType("application/json");
+        response.getWriter().print(obj);
+    }
 
-	// Writes a JSONObject to http response.
-	public static void writeJsonObject(HttpServletResponse response, JSONObject obj) throws IOException {
-		response.setContentType("application/json");
-		response.getWriter().print(obj);
+    // Parses JSONObject from http request
+    public static JSONObject readJSONObject(HttpServletRequest request) throws IOException {
+        BufferedReader reader = new BufferedReader(request.getReader());
+        StringBuilder requestBody = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            requestBody.append(line);
+        }
+        return new JSONObject(requestBody.toString());
+    }
 
-	}
+    // Convert JSON object to Item object
+    public static Item parseFavoriteItem(JSONObject favoriteItem) {
+        ItemBuilder builder = new ItemBuilder();
+        builder.setJobTitle(favoriteItem.getString("job_title"));
+        builder.setEmployerName(favoriteItem.getString("employer_name"));
+        builder.setJobLocation(favoriteItem.getString("job_location"));
+        builder.setJobApplyLink(favoriteItem.getString("job_apply_link"));
+        builder.setEmployerLogo(favoriteItem.getString("employer_logo"));
 
-	// Parses a JSONObject from http request.
-	public static JSONObject readJSONObject(HttpServletRequest request) throws IOException {
-		BufferedReader reader = new BufferedReader(request.getReader());
-		StringBuilder requestBody = new StringBuilder();
-		String line = null;
-		while ((line = reader.readLine()) != null) {
-			requestBody.append(line);
-		}
-		return new JSONObject(requestBody.toString());
-	}
-
-	// Convert a JSON object to Item object
-	public static Item parseFavoriteItem(JSONObject favoriteItem) {
-		ItemBuilder builder = new ItemBuilder();
-		builder.setItemId(favoriteItem.getString("item_id"));
-		builder.setName(favoriteItem.getString("name"));
-		builder.setAddress(favoriteItem.getString("address"));
-		builder.setUrl(favoriteItem.getString("url"));
-		builder.setImageUrl(favoriteItem.getString("image_url"));
-
-		Set<String> keywords = new HashSet<>();
-		JSONArray array = favoriteItem.getJSONArray("keywords");
-		for (int i = 0; i < array.length(); ++i) {
-			keywords.add(array.getString(i));
-		}
-		builder.setKeywords(keywords);
-		return builder.build();
-	}
-
+        Set<String> keywords = new HashSet<>();
+        JSONArray array = favoriteItem.getJSONArray("keywords");
+        for (int i = 0; i < array.length(); ++i) {
+            keywords.add(array.getString(i));
+        }
+        builder.setKeywords(keywords);
+        return builder.build();
+    }
 }

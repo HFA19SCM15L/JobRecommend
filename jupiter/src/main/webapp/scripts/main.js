@@ -227,7 +227,13 @@ function register() {
 }
 
 function showRegisterResult(registerMessage) {
-	document.querySelector('#register-result').innerHTML = registerMessage;
+	var errorDiv = document.querySelector('#register-result');
+	errorDiv.innerHTML = registerMessage;
+	errorDiv.style.display = 'block'; // Show the error div
+
+	setTimeout(function() {
+		errorDiv.style.display = 'none'; // Hide the error div after 5 seconds
+	}, 3000);
 }
 
 function clearRegisterResult() {

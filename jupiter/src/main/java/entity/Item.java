@@ -1,26 +1,29 @@
 package entity;
 
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Item {
-	private static final AtomicInteger ID_GENERATOR = new AtomicInteger(0); // For generating unique item IDs
-	private int itemId;
+	private String itemId;
 	private String jobTitle;
 	private String employerName;
 	private String employerLogo;
 	private String jobApplyLink;
-	private String jobCity;
-	private String jobState;
+	private String jobLocation;
+	private String jobPostDate;
+	private Set<String> keywords;
 
 	public String getItemId() {
 		return String.valueOf(itemId);
 	}
 
-	public void setItemId(int itemId) {
+	public void setItemId(String itemId) {
 		this.itemId = itemId;
 	}
 
@@ -56,30 +59,39 @@ public class Item {
 		this.jobApplyLink = jobApplyLink;
 	}
 
-	public String getJobCity() {
-		return jobCity;
+	public String getJobLocation() {
+		return jobLocation;
 	}
 
-	public void setJobCity(String jobCity) {
-		this.jobCity = jobCity;
+	public void setJobLocation(String jobLocation) {
+		this.jobLocation = jobLocation;
 	}
 
-	public String getJobState() {
-		return jobState;
+	public String getJobPostDate() {
+		return jobPostDate;
 	}
 
-	public void setJobState(String jobState) {
-		this.jobState = jobState;
+	public void setJobPostDate(String jobPostDate) {
+		this.jobPostDate = jobPostDate;
+	}
+
+	public Set<String> getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(Set<String> keywords) {
+		this.keywords = keywords;
 	}
 
 	private Item(ItemBuilder builder) {
-		this.itemId = ID_GENERATOR.getAndIncrement();;
+		this.itemId = builder.itemId;
 		this.jobTitle = builder.jobTitle;
 		this.employerName = builder.employerName;
 		this.employerLogo = builder.employerLogo;
 		this.jobApplyLink = builder.jobApplyLink;
-		this.jobCity = builder.jobCity;
-		this.jobState = builder.jobState;
+		this.jobLocation = builder.jobLocation;
+		this.jobPostDate = builder.jobPostDate;
+		this.keywords = builder.keywords;
 	}
 
 	public JSONObject toJSONObject() {
@@ -89,18 +101,25 @@ public class Item {
 		obj.put("employer_name", employerName);
 		obj.put("employer_logo", employerLogo);
 		obj.put("job_apply_link", jobApplyLink);
-		obj.put("job_city", jobCity);
-		obj.put("job_state", jobState);
+		obj.put("job_location", jobLocation);
+		obj.put("job_post_date", jobPostDate);
+		obj.put("keywords", new JSONArray(keywords));
 		return obj;
 	}
 
 	public static class ItemBuilder {
+		private String itemId;
 		private String jobTitle;
 		private String employerName;
 		private String employerLogo;
 		private String jobApplyLink;
-		private String jobCity;
-		private String jobState;
+		private String jobLocation;
+		private String jobPostDate;
+		private Set<String> keywords;
+
+		public void setItemId(String itemId) {
+			this.itemId = itemId;
+		}
 
 		public void setJobTitle(String jobTitle) {
 			this.jobTitle = jobTitle;
@@ -116,14 +135,41 @@ public class Item {
 
 		public void setJobApplyLink(String jobApplyLink) {
 			this.jobApplyLink = jobApplyLink;
+			setItemId(generateItemId(jobApplyLink));
+		}
+		private String generateItemId(String url) {
+			try {
+				MessageDigest digest = MessageDigest.getInstance("SHA-256");
+				byte[] encodedhash = digest.digest(url.getBytes(StandardCharsets.UTF_8));
+				return bytesToHex(encodedhash);
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+				return null;
+			}
 		}
 
-		public void setJobCity(String jobCity) {
-			this.jobCity = jobCity;
+		private static String bytesToHex(byte[] hash) {
+			StringBuilder hexString = new StringBuilder(2 * hash.length);
+			for (byte b : hash) {
+				String hex = Integer.toHexString(0xff & b);
+				if (hex.length() == 1) {
+					hexString.append('0');
+				}
+				hexString.append(hex);
+			}
+			return hexString.toString();
 		}
 
-		public void setJobState(String jobState) {
-			this.jobState = jobState;
+		public void setJobLocation(String jobLocation) {
+			this.jobLocation = jobLocation;
+		}
+
+		public void setJobPostDate(String jobPostDate) {
+			this.jobPostDate = DateConverter.convertDateToNewFormat(jobPostDate);
+		}
+
+		public void setKeywords(Set<String> keywords) {
+			this.keywords = keywords;
 		}
 
 		public Item build() {

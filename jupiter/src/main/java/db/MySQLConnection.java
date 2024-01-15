@@ -14,16 +14,17 @@ import entity.Item.ItemBuilder;
 public class MySQLConnection {
 	private Connection conn;
 
+	// Load MySQL JDBC driver and establish a connection to the database using the MySQLDBUtil.URL
 	public MySQLConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").getConstructor().newInstance();
 			conn = DriverManager.getConnection(MySQLDBUtil.URL);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	// Close the database connection when called
 	public void close() {
 		if (conn != null) {
 			try {
@@ -34,6 +35,8 @@ public class MySQLConnection {
 		}
 	}
 
+	// Add a favorite item for a user
+	// Insert a record into the history table linking the userId with the item's ID
 	public void setFavoriteItems(String userId, Item item) {
 		if (conn == null) {
 			System.err.println("DB connection failed");
@@ -51,6 +54,8 @@ public class MySQLConnection {
 		}
 	}
 
+	// Remove a favorite item for a user
+	// Delete the record from the history table for the given userId and itemId
 	public void unsetFavoriteItems(String userId, String itemId) {
 		if (conn == null) {
 			System.err.println("DB connection failed");
@@ -67,6 +72,8 @@ public class MySQLConnection {
 		}
 	}
 
+	// Save an item into the items table
+	// Insert keywords associated with the item into the keywords table
 	public void saveItem(Item item) {
 		if (conn == null) {
 			System.err.println("DB connection failed");
@@ -76,10 +83,10 @@ public class MySQLConnection {
 		try {
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, item.getItemId());
-			statement.setString(2, item.getName());
-			statement.setString(3, item.getAddress());
-			statement.setString(4, item.getImageUrl());
-			statement.setString(5, item.getUrl());
+			statement.setString(2, item.getJobTitle());
+			statement.setString(3, item.getJobLocation());
+			statement.setString(4, item.getEmployerLogo());
+			statement.setString(5, item.getJobApplyLink());
 			statement.executeUpdate();
 
 			sql = "INSERT IGNORE INTO keywords VALUES (?, ?)";
@@ -94,6 +101,7 @@ public class MySQLConnection {
 		}
 	}
 
+	// Retrieve the IDs of all favorite items for a given user
 	public Set<String> getFavoriteItemIds(String userId) {
 		if (conn == null) {
 			System.err.println("DB connection failed");
@@ -118,6 +126,7 @@ public class MySQLConnection {
 		return favoriteItems;
 	}
 
+	// Retrieve all favorite Item objects for a given user
 	public Set<Item> getFavoriteItems(String userId) {
 		if (conn == null) {
 			System.err.println("DB connection failed");
@@ -136,10 +145,10 @@ public class MySQLConnection {
 				ItemBuilder builder = new ItemBuilder();
 				if (rs.next()) {
 					builder.setItemId(rs.getString("item_id"));
-					builder.setName(rs.getString("name"));
-					builder.setAddress(rs.getString("address"));
-					builder.setImageUrl(rs.getString("image_url"));
-					builder.setUrl(rs.getString("url"));
+					builder.setJobTitle(rs.getString("name"));
+					builder.setJobLocation(rs.getString("address"));
+					builder.setEmployerLogo(rs.getString("image_url"));
+					builder.setJobApplyLink(rs.getString("url"));
 					builder.setKeywords(getKeywords(itemId));
 					favoriteItems.add(builder.build());
 				}
@@ -150,6 +159,7 @@ public class MySQLConnection {
 		return favoriteItems;
 	}
 
+	// Retrieve all keywords associated with a given item ID
 	public Set<String> getKeywords(String itemId) {
 		if (conn == null) {
 			System.err.println("DB connection failed");
@@ -171,6 +181,7 @@ public class MySQLConnection {
 		return keywords;
 	}
 
+	// Retrieve the full name of a user based on userId
 	public String getFullname(String userId) {
 		if (conn == null) {
 			System.err.println("DB connection failed");
@@ -191,6 +202,7 @@ public class MySQLConnection {
 		return name;
 	}
 
+	// Verify if the given userId and password combination is valid
 	public boolean verifyLogin(String userId, String password) {
 		if (conn == null) {
 			System.err.println("DB connection failed");
@@ -211,6 +223,7 @@ public class MySQLConnection {
 		return false;
 	}
 
+	// Add a new user to the users table
 	public boolean addUser(String userId, String password, String firstname, String lastname) {
 		if (conn == null) {
 			System.err.println("DB connection failed");
@@ -231,5 +244,4 @@ public class MySQLConnection {
 		}
 		return false;
 	}
-
 }

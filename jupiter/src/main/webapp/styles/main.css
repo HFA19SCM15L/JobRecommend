@@ -1,351 +1,403 @@
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-	background: #434343;
-	color: #FFFFFF;
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 300;
-	font-size: 0.9em;
+    background: #febe98;
+    color: #333;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Covers the full viewport height */
 }
 
 ul {
-	list-style: none;
+    list-style: none;
+}
+
+.content {
+    flex: 1 0 auto; /* Push the footer down */
 }
 
 /**
  * top header
  */
 .top-header {
-	align-items: center;
-	background: #DF574B;
-	box-shadow: 0px 2px 10px #333333;
-	display: flex;
-	height: 60px;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 1;
+    align-items: center;
+    background: #ffffff;
+    display: flex;
+    height: 60px;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
-.avatar {
-	background: #FFFFFF;
-	border-radius: 50%;
-	color: #333C4D;
-	height: 40px;
-	margin-right: 20px;
+.fa-person-walking-arrow-right {
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-right: 60px;
     margin-left: 10px;
-	padding-left: 9px;
-	padding-top: 5px;
-	width: 40px;
 }
 
-#logout-link {
-	padding-left: 10px;
-	color: white;
+#logout-link,
+.top-nav a,
+#welcome-msg {
+    font-family: "Gill Sans", sans-serif;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+#logout-link:hover,
+.top-nav a:hover {
+    text-decoration: underline;
+}
+
+#welcome-msg {
+    border-right: 1px solid var(--primary-color);
+    padding-right: 10px;
 }
 
 /**
  * top navigation
  */
 .top-nav {
-	flex: 1;
+    flex: 1;
+    margin-left: 20px; /* Give space after the logo or brand name */
 }
 
 .top-nav a {
-	color: #F9F9F9;
-	font-weight: 400;
-	margin-left: 20px;
-	text-decoration: none;
-}
-
-#welcome-msg {
-	border-right: 1px solid #FFFFFF;
-	padding-right: 10px;
+    margin: 0 10px; /* Consistent margin for all anchor tags */
 }
 
 /**
  * main container
  */
 .container {
-	margin: 60px auto;
-	max-width: 1000px;
-	min-width: 600px;
+    display: flex;
+    flex-direction: column;
+    margin: 60px auto;
+    max-width: 90%;
+    min-width: 600px;
 }
 
 /**
  * main header
  */
-.container>header {
-	align-items: center;
-	background:
-		url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQlWV6OFMhLUkHsggvaY3QWEyhlAz4M41oUnjpBgc95EqD9lzBV')
-		no-repeat top;
-	background-size: 100%;
-	display: flex;
-	height: 250px;
+.container > header {
+    align-items: center;
+    background-size: cover; /* Assuming you want the background to cover the entire header */
+    color: #0d214f;
+    display: flex;
+    font-size: 2em;
+    height: 250px;
+    justify-content: space-between; /* Assuming you want spacing between items, if not remove */
+    padding: 0 20px; /* Consistent padding for all sides */
 }
 
-.container>header p {
-	border-left: 1px solid #FFFFFF;
-	font-weight: 400;
-	font-size: 2em;
-	line-height: 1em;
-	margin-left: 220px;
-	padding-left: 5px;
+.container > header p {
+    border-left: 1px solid #0d214f;
+    font-family: "Gill Sans", sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1em;
+    padding-left: 5px;
 }
 
-.container>header span {
-	color: #FBAF41;
+.container > header .header-content h1 {
+    align-items: center;
+    display: flex;
+    gap: 10px; /* Space between 'Item' text and the icon */
+    margin: 0; /* Adjusted to remove negative margin */
 }
 
-/**
- * login form
- */
-#login-form {
-	color: #624630;
-	margin: 0px auto;
-	overflow: auto;
-	padding: 40px;
-	width: 350px;
-}
+/* Removed unnecessary .fa-stroopwafel class as styles can be applied within h1 */
 
-#login-form label {
-	display: block;
-}
-
-#login-form input {
-	border: none;
-	display: block;
-	margin-bottom: 10px;
-	padding: 8px;
-	width: 100%;
-}
-
-#login-form #login-btn {
-	cursor: pointer;
-	float: right;
-	padding: 8px 20px;
-	text-align: right;
-}
-
-#login-form #register-form-btn {
-	cursor: pointer;
-	float: left;
-	padding: 8px 10px;
-	text-align: left;
-}
-
-#login-error {
-	clear: both;
-	color: #990000;
-	padding-top: 10px;
-}
-
-/**
- * register form
- */
-#register-form {
-	color: #624630;
-	margin: 0px auto;
-	overflow: auto;
-	padding: 40px;
-	width: 350px;
-}
-
-#register-form label {
-	display: block;
-}
-
-#register-form input {
-	border: none;
-	display: block;
-	margin-bottom: 10px;
-	padding: 8px;
-	width: 100%;
-}
-
-#register-form #login-form-btn {
-	cursor: pointer;
-	float: left;
-	padding: 8px 10px;
-	text-align: left;
-}
-
-#register-form #register-btn {
-	cursor: pointer;
-	float: right;
-	padding: 8px 20px;
-	text-align: right;
-}
-
-#register-result {
-	clear: both;
-	color: #990000;
-	padding-top: 10px;
+.container > header .header-content .tagline {
+    border-left: 2px solid #0d214f;
+    display: inline-block;
+    margin: 0;
+    padding-left: 10px;
+    vertical-align: middle;
 }
 
 /**
  * main section
  */
 .main-section {
-	background: #F3BB43;
+    align-items: center; /* Center children horizontally */
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center; /* Center children vertically */
+    margin: auto;
+    min-width: 400px;
+    padding: 20px;
+    width: auto; /* Will grow to fit content up to the parent container's max-width */
 }
+
+
+/* Variables for consistent styling */
+:root {
+    --primary-color: #0d214f;
+    --primary-text-color: #624630;
+    --button-bg-color: #0d214f;
+    --button-text-color: white;
+    --error-bg-color: #007bff;
+    --error-text-color: #ffffff;
+    --input-border-color: #ddd;
+}
+
+/* Login Form Styles */
+#login-form, #register-form {
+    align-items: flex-end;
+    color: var(--primary-text-color);
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    overflow: auto;
+    padding: 40px;
+    position: relative;
+    max-width: 400px;
+    width: 100%; /* Full width to the parent container */
+}
+
+#login-form label, #register-form label {
+    display: block;
+    margin-top: 10px;
+}
+
+/* Shared styles for input and button */
+#login-form input,
+#login-form button,
+#register-form input,
+#register-form button {
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
+    margin: 5px 0;
+    padding: 10px;
+    width: calc(100%);
+}
+
+#login-form button, #register-form button {
+    background-color: var(--button-bg-color);
+    border: none;
+    color: var(--button-text-color);
+    cursor: pointer;
+    font-family: "Gill Sans", sans-serif;
+    font-size: 15px;
+}
+
+#login-form #register-form-btn {
+    background-color: #5fa777;
+}
+
+#login-error, #register-result {
+    background-color: var(--error-bg-color);
+    border-radius: 4px;
+    color: var(--error-text-color);
+    display: none; /* Hidden by default */
+    font-family: "Gill Sans", sans-serif;
+    font-size: 15px;
+    margin: 5px 0;
+    padding: 10px;
+    text-align: center;
+    width: calc(100%);
+}
+
+#register-form #register-btn {
+    background-color: #5fa777;
+}
+
+#register-form #login-form-btn {
+    background-color: #cad8ce;
+}
+
 
 /**
  * aside
  */
 #item-nav {
-	float: left;
-	width: 180px;
+    float: left;
+    width: 180px;
 }
 
 .nav-icon {
-	color: #624630;
-	padding: 20px;
-	text-align: center;
+    color: #53311d;
+    padding: 20px;
 }
 
 /**
  * main navigation
  */
 .main-nav-btn {
-	background: none;
-	border-top: 1px solid #FFFFFF;
-	color: #FFFFFF;
-	display: block;
-	padding: 20px;
-	text-align: left;
-	text-decoration: none;
+    background: none;
+    border-top: 1px solid #FFFFFF;
+    color: #F0DBAF;
+    display: block;
+    padding: 20px;
+    text-align: left;
+    text-decoration: none;
 }
 
-.main-nav-btn:hover {
-	background: rgba(255, 255, 255, 0.8);
-	color: #624630;
-}
-
+.main-nav-btn:hover,
 .main-nav-btn.active {
-	background: #F2EBD9;
-	color: #624630;
+    background: rgba(255, 255, 255, 0.8);
+    color: #53311d;
 }
 
 .main-nav-btn i {
-	width: 20px;
+    margin-right: 10px;
 }
 
 /**
  * item list
  */
 #item-list {
-	background: #F2EBD9;
-	color: #624630;
-	list-style: none;
-	margin-left: 180px;
-	min-height: 250px;
-	padding: 10px;
+    color: #53311d;
+    list-style: none;
+    min-height: 250px;
+    padding: 10px;
 }
 
 #item-list .notice {
-	font-size: 16px;
-	padding: 60px;
-	text-align: center;
+    font-size: 16px;
+    padding: 60px;
+    text-align: center;
 }
 
 /**
  * item
  */
 .item {
-	align-items: center;
-	border-bottom: 1px solid #FFFFFF;
-	display: flex;
-	margin: 10px;
-	padding: 15px;
-	transition: background-color 100ms linear;
+    align-items: center;
+    background: #FCF5ED;
+    border-bottom: 1px solid #FFFFFF;
+    border-radius: 4px;
+    display: flex;
+    margin: 10px;
+    padding: 15px;
+    transition: background-color 100ms linear; /* Set once for both states */
+    width: 700px;
 }
 
 .item:last-child {
-	border: none;
+    border-bottom: none; /* Only the bottom border is removed */
 }
 
 .item:hover {
-	background: rgba(255, 255, 255, 0.8);
-	transition: background-color 100ms linear;
+    background: #f8e9d7; /* Transition is already defined above */
 }
 
 .item img {
-	border: 1px solid #FFFFFF;
-	height: 80px;
-	width: 80px;
+    border: none; /* Simplified border removal */
+    height: 60px;
+    margin-right: 10px;
+    width: 60px;
 }
 
-.item>div:first-of-type {
-	flex: 1;
-	margin-left: 10px;
-	margin-right: 10px;
+.item > div:first-of-type {
+    flex: 1; /* Shorthand for flex-grow: 1, flex-shrink: 1, and flex-basis: 0 */
+    margin: 0 10px; /* Combined margin properties */
 }
 
 .item-name {
-	color: #624630;
-	font-weight: 400;
-	text-decoration: none;
+    color: #53311d;
+    font-weight: 400;
+    position: relative; /* For pseudo-element positioning */
+    text-decoration: none;
 }
 
 .item-name:hover {
-	text-decoration: underline;
+    text-decoration: none; /* Ensuring it doesn't interfere with the pseudo-element */
+}
+
+.item-name:hover::after {
+    background-color: currentColor; /* Ensures the box-shadow color matches the text color */
+    content: '';
+    height: 1px;
+    left: 0;
+    position: absolute;
+    bottom: -1px;
+    width: 100%;
+    box-shadow: 0 1px;
 }
 
 .item-address {
-	line-height: 20px;
-	padding-right: 20px;
-	text-align: right;
+    line-height: 20px;
+    padding-right: 20px;
+    text-align: right;
 }
 
 .stars {
-	align-items: center;
-	display: flex;
-	padding-top: 10px;
+    align-items: center;
+    display: flex;
+    padding-top: 10px;
 }
 
 .fav-link {
-	border-left: 1px solid #FFFFFF;
-	cursor: pointer;
-	line-height: 60px;
-	text-align: center;
-	width: 60px;
+    border-left: 1px solid #FFFFFF;
+    cursor: pointer;
+    line-height: 60px;
+    text-align: center;
+    width: 60px;
 }
 
 .fav-link:hover {
-	color: #F13F3F;
+    color: #DF826C;
 }
 
 /**
  * footer section
  */
 footer {
-	background: #434343;
-	font-size: 0.8em;
-	height: 200px;
-	position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center; /* Centers text for all footer content */
+    flex-shrink: 0; /* Prevents the footer from shrinking */
+    font-size: 0.8em; /* Sets the base font size */
+    height: 200px; /* Sets a fixed height for the footer */
+    margin-top: 200px; /* Adds space above the footer */
 }
 
-footer p {
-	text-align: center;
-}
-
-footer p.title {
-	font-size: 1.2em;
-	padding: 15px;
+footer .title {
+    font-size: 1.2em; /* Sets a larger font size for titles */
+    padding: 15px; /* Adds padding around titles */
 }
 
 footer ul {
-	align-items: center;
-	display: flex;
-	padding: 20px;
+    list-style-type: none; /* Removes default list styling */
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes default padding */
+    display: flex; /* Enables flexbox layout */
+    align-items: center; /* Vertically centers list items */
+    justify-content: center; /* Horizontally centers list items */
 }
 
 footer ul li {
-	flex: 1;
+    margin: 0 5px; /* Adds horizontal spacing between list items */
+}
+
+footer a {
+    color: #333; /* Sets the link color */
+    text-decoration: none; /* Removes the underline from links */
+}
+
+footer a:hover {
+    color: #ffffff; /* Changes link color on hover */
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        max-width: 100%; /* Full width on smaller screens */
+    }
+
+    .top-nav a {
+        margin-left: 10px; /* Less spacing for smaller screens */
+    }
 }
