@@ -40,7 +40,7 @@ To use the application:
 ## Interface Mockups
 
 ### Home Page
-![Home Page](https://github.com/HFA19SCM15L/JobRecommend/blob/add_careerjet_api/Register%20Page.png)
+![Home Page](https://github.com/HFA19SCM15L/JobRecommend/blob/add_careerjet_api/Home%20Page.png)
 
 ### Register Page
 ![Register Page](https://github.com/HFA19SCM15L/JobRecommend/blob/add_careerjet_api/Register%20Page.png)
